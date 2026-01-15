@@ -1,0 +1,68 @@
+@model PruebaTecnicaMultiMoney.Models.Prestamo
+
+@{
+    ViewData["Title"] = "Solicitar Préstamo";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0">
+                        <i class="bi bi-cash-coin me-2"></i>Solicitar Préstamo
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info" role="alert">
+                        <h5 class="alert-heading"><i class="bi bi-info-circle me-2"></i>Condiciones del Préstamo</h5>
+                        <ul class="mb-0">
+                            <li><strong>Monto:</strong> Entre $1,000 y $40,000</li>
+                            <li><strong>Plazo:</strong> Mínimo 12 meses</li>
+                            <li><strong>Tasa mensual fija:</strong> 1.75%</li>
+                            <li><strong>Comisión:</strong> 5% del monto solicitado (cobrada al inicio)</li>
+                        </ul>
+                    </div>
+
+                    <form asp-action="Create" method="post">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="Monto" class="form-label fw-bold">
+                                <i class="bi bi-currency-dollar me-1"></i>Monto a Solicitar
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input asp-for="Monto" class="form-control form-control-lg" placeholder="Ej: 10000" />
+                            </div>
+                            <span asp-validation-for="Monto" class="text-danger small"></span>
+                            <small class="form-text text-muted">Ingrese el monto entre $1,000 y $40,000</small>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="PlazoMeses" class="form-label fw-bold">
+                                <i class="bi bi-calendar-range me-1"></i>Plazo en Meses
+                            </label>
+                            <input asp-for="PlazoMeses" class="form-control form-control-lg" placeholder="Ej: 12" />
+                            <span asp-validation-for="PlazoMeses" class="text-danger small"></span>
+                            <small class="form-text text-muted">Plazo mínimo de 12 meses</small>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="bi bi-calculator me-2"></i>Calcular y Solicitar
+                            </button>
+                            <a asp-action="Index" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-left me-2"></i>Volver a la Lista
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
